@@ -9,7 +9,7 @@ class FotoController {
     static getRandom(req, res, next) {
         axios({
             method: 'GET',
-            url: `https://api.unsplash.com/photos/random/`,
+            url: `https://api.unsplash.com/photos/random/?count=8`,
             headers: {
                 Authorization: 'Client-ID f2758eaab74509bb327a64ea3b4a54a78c3f5b35617cd9d2cd647c921183cc65' //Sementara
             }

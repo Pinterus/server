@@ -18,12 +18,12 @@ app.use(express.json())
 app.use(express.urlencoded({extended:false}))
 
 app.use('/',routes)
-mongoose.connect(process.env.URL_MONGOOSE, {useNewUrlParser: true,useUnifiedTopology: true,useCreateIndex: true})
-    .then(_=> {
-        console.log("mongoose successfully connect");
-    })
-    .catch(console.log)
+// mongoose.connect(process.env.URL_MONGOOSE, {useNewUrlParser: true,useUnifiedTopology: true,useCreateIndex: true})
+    // .then(_=> {
+    //     console.log("mongoose successfully connect");
+    // })
+    // .catch(console.log)
 
 app.use(errorHandler)
 
-app.listen(PORT,_=>{console.log(`listening on port PORT`)})
+app.listen(PORT,_=>{console.log(`listening on port ${PORT}`)})

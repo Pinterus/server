@@ -4,7 +4,9 @@ const {generateToken} = require('../helpers/jwt')
 
 class UserController {
     static register (req,res,next) {
-        const {username,password,email} = req.body
+        let {username,password,email} = req.body
+        console.log(req.body);
+        
         User.create({username,password,email})
             .then(result => {
                 let payload = {email:result.email, _id:result._id}
@@ -15,21 +17,21 @@ class UserController {
     }
 
     static login (req,res,next) {
-        const {email,password} = req.body
+        let {email,password} = req.body
         User.findOne({email})
-        .then(user=>{
-            if(user && comparePassword(password,user.password)) {
-                let payload = {email:user.email, _id:user._id}
-                let token = generateToken(payload)
-                res.status(200).json({token, username:user.username})
-            } else {
-                throw {
-                    msg: 'invalid email/password',
-                    statusCode: 401
+            .then(user=>{
+                if(user && comparePassword(password,user.password)) {
+                    let payload = {email:user.email, _id:user._id}
+                    let token = generateToken(payload)
+                    res.status(200).json({token, username:user.username})
+                } else {
+                    throw {
+                        msg: 'invalid email/password',
+                        statusCode: 401
+                    }
                 }
-            }
-        })
-        .catch(next)
+            })
+            .catch(next)
     }
 }
 

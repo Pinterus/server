@@ -2,8 +2,12 @@ const Foto = require('../models/foto')
 const axios = require('axios')
 
 class FotoController {
-    static import(req, res, next){
-
+    static getall(req, res, next){
+        Foto.find()
+        .then(images => {
+            res.status(200).json(images)
+        })
+        .catch(next)
     }
 
     static getRandom(req, res, next) {

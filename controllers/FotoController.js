@@ -43,12 +43,19 @@ class FotoController {
     }
 
     static getLinkUploaded(req,res,next){
-        console.log(req.file)
-        console.log(req.body)
-        res.send({
-            status: 200,
-            message: 'Your file is successfully uploaded',
-            link: req.file.cloudStoragePublicUrl
+        Foto.create({
+            name : req.file.originalname,
+            location : req.file.cloudStoragePublicUrl
+        })
+        .then((success)=>{
+            res.send({
+                status: 200,
+                message: 'Your file is successfully uploaded',
+                link: req.file.cloudStoragePublicUrl
+            })
+        })
+        .catch((err)=>{
+            next(err)
         })
     }
 }

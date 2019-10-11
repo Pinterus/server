@@ -11,27 +11,27 @@ class FotoController {
             method: 'GET',
             url: `https://api.unsplash.com/photos/random/?count=8`,
             headers: {
-                Authorization: 'Client-ID f2758eaab74509bb327a64ea3b4a54a78c3f5b35617cd9d2cd647c921183cc65' //Sementara
+                Authorization: 'Client-ID '+process.env.SECRET_UNSPLASH
             }
         })
             .then(img_data => {
-                console.log(img_data)
+                // console.log(img_data)
                 res.status(200).json(img_data.data)
             })
             .catch(err => {
-                console.log('masuk catch')
+                // console.log('masuk catch')
                 next(err)
             })
     }
 
     static searchImages(req, res, next) {
         // https://api.unsplash.com/search/photos?page=1&query=football
-        console.log(req.query)
+        // console.log(req.query)
         axios({
             method: 'GET',
-            url: `https://api.unsplash.com/search/photos?page=1&query=${req.query.keyword}`,
+            url: `https://api.unsplash.com/search/photos?page=1&query=${req.query.keyword}&count=8`,
             headers: {
-                Authorization: 'Client-ID f2758eaab74509bb327a64ea3b4a54a78c3f5b35617cd9d2cd647c921183cc65' //Sementara
+                Authorization: 'Client-ID '+process.env.SECRET_UNSPLASH
             }
         })
             .then(img_datas => {
